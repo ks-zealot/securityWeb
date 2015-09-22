@@ -17,12 +17,17 @@
  хорошему надо использовать базу данных, например Cassandra, которая из коробки умеет  настраваить ttl записи
 Для запуска надо выполнить команду
 ```sh
-java -jar com.sec.web.app.Backend -n "OAuth client web application"
+mvn clone git@github.com:ks-zealot/securityWeb.git
+cd securityWeb/
+```
+
+```sh
+mvn exec:java -Dexec.mainClass="com.sec.web.app.Backend"  -Dexec.args '-n OAuth client web application'
 ```
 (клиентская часть OAUTH инфраструктуры)
 и
 ```sh
-java -jar com.sec.web.app.Backend -n "OAuth server web application"
+mvn exec:java -Dexec.mainClass="com.sec.web.app.Backend"  -Dexec.args '-n OAuth server web application'
 ```
 серверная часть инфрастуктуры
 Для реализации протокола SSL используется сертификат server.cert в папке ресурсов проекта, который уже добавлен в
@@ -32,7 +37,8 @@ java -jar com.sec.web.app.Backend -n "OAuth server web application"
 Там описаны три аккаунта *admin1, admin2, admin3*
 C паролями *password1, password2, password3*
 Админ1 имеет все права, админ2 имеет право на первый защищенный ресурс, админ3  на защищенный второй
-
+Для редактирование параметров приложения (клиентский айдишник, реквест токен, адреса на ктоорых будут подняты сервера)
+нужно обратиться в ./resources/security.properties
 # Устройство http сервера
 Сервер запускается в классе GryzzlyWrapper и представляет собой обертку вокруг сервера Gryzzly. На нем регистрируются
  два handlera по адресам */login*  и */secRes*
