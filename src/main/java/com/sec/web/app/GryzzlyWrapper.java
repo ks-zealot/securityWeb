@@ -69,6 +69,7 @@ public class GryzzlyWrapper {
             config.addHttpHandler(authHandler, "/login");
             ClientSecurityResourceHandler secHandler = new ClientSecurityResourceHandler(this);
             config.addHttpHandler(secHandler, "/secRes");
+
         } else if (name.contains("server")) {//OAuth server web application
             host = PropertiesUtil.getString("serverAddress");
             port = PropertiesUtil.getInt("serverPort");
@@ -91,7 +92,8 @@ public class GryzzlyWrapper {
             ServerSecurityResourceHandler secHandler = new ServerSecurityResourceHandler(this);
             config.addHttpHandler(secHandler, "/secRes");
         }
-
+        RootHandler root = new RootHandler();
+        config.addHttpHandler(root, "/");
         logger.info("start server listener on host " + host + " port " + port);
 
 
