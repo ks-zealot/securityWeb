@@ -17,17 +17,17 @@
  хорошему надо использовать базу данных, например Cassandra, которая из коробки умеет  настраваить ttl записи
 Для запуска надо выполнить команду
 ```sh
-mvn clone https://github.com/ks-zealot/securityWeb.git
+git clone https://github.com/ks-zealot/securityWeb.git
 cd securityWeb/
 ```
 
 ```sh
-mvn exec:java -Dexec.mainClass="com.sec.web.app.Backend"  -Dexec.args="-n 'OAuth client web application'"
+mvn compile exec:java -Dexec.mainClass="com.sec.web.app.Backend"  -Dexec.args="-n 'OAuth client web application'"
 ```
 (клиентская часть OAUTH инфраструктуры)
 и
 ```sh
-mvn exec:java -Dexec.mainClass="com.sec.web.app.Backend"  -Dexec.args="-n 'OAuth server web application'"
+mvn compile exec:java -Dexec.mainClass="com.sec.web.app.Backend"  -Dexec.args="-n 'OAuth server web application'"
 ```
 серверная часть инфрастуктуры
 Для реализации протокола SSL используется сертификат server.cert в папке ресурсов проекта, который уже добавлен в
