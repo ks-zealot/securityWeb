@@ -17,7 +17,7 @@
  хорошему надо использовать базу данных, например Cassandra, которая из коробки умеет  настраваить ttl записи
 Для запуска надо выполнить команду
 ```sh
-mvn clone git@github.com:ks-zealot/securityWeb.git
+mvn clone https://github.com/ks-zealot/securityWeb.git
 cd securityWeb/
 ```
 
