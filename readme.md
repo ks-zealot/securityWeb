@@ -22,12 +22,12 @@ cd securityWeb/
 ```
 
 ```sh
-mvn exec:java -Dexec.mainClass="com.sec.web.app.Backend"  -Dexec.args '-n OAuth client web application'
+mvn exec:java -Dexec.mainClass="com.sec.web.app.Backend"  -Dexec.args="-n 'OAuth client web application'"
 ```
 (клиентская часть OAUTH инфраструктуры)
 и
 ```sh
-mvn exec:java -Dexec.mainClass="com.sec.web.app.Backend"  -Dexec.args '-n OAuth server web application'
+mvn exec:java -Dexec.mainClass="com.sec.web.app.Backend"  -Dexec.args="-n 'OAuth server web application'"
 ```
 серверная часть инфрастуктуры
 Для реализации протокола SSL используется сертификат server.cert в папке ресурсов проекта, который уже добавлен в
