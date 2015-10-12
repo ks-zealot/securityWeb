@@ -1,7 +1,10 @@
 package com.sec.web.handlers;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.sec.web.app.GryzzlyWrapper;
+import com.sec.web.enity.Result;
 import com.sec.web.util.Formatter;
 import com.sec.web.util.HtmlLoader;
 import com.sec.web.util.PropertiesUtil;
@@ -24,6 +27,7 @@ public class ClientSecurityResourceHandler extends HttpHandler {
     private static final Logger logger = Logger.getLogger(ClientSecurityResourceHandler.class);
     private GryzzlyWrapper wrapper;
     private HtmlLoader loader = new HtmlLoader();
+    private ObjectMapper mapper = new ObjectMapper();
 
     public ClientSecurityResourceHandler(GryzzlyWrapper wrapper) {
         super();
@@ -55,19 +59,29 @@ public class ClientSecurityResourceHandler extends HttpHandler {
             String accessToken = request.getParameter("accessToken");
             String sec = request.getParameter("sec");
             if (sec != null) {
+                Result result = new Result();
+                ObjectWriter writer = mapper.writer().withDefaultPrettyPrinter();
                 switch (sec) {
                     case "1":
                         if (!currentUser.hasRole("secrole1")) {
-                            response.getWriter().write(loader.loadHtml("notAllowed.html"));
+                            result.setResult("User not allowed");
+                            result.setStatus(503);
+                            response.getWriter().write(writer.writeValueAsString(result));//loader.loadHtml("notAllowed.html"));
                         } else {
-                            response.getWriter().write(loader.loadHtml("securityResource1.html"));
+                            result.setResult("Success get first resource");
+                            result.setStatus(200);
+                            response.getWriter().write(writer.writeValueAsString(result));//loader.loadHtml("securityResource1.html"));
                         }
                         return;
                     case "2":
                         if (!currentUser.hasRole("secrole2")) {
-                            response.getWriter().write(loader.loadHtml("notAllowed.html"));
+                            result.setResult("User not allowed");
+                            result.setStatus(503);
+                            response.getWriter().write(writer.writeValueAsString(result));//loader.loadHtml("notAllowed.html"));
                         } else {
-                            response.getWriter().write(loader.loadHtml("securityResource2.html"));
+                            result.setResult("Success get second resource");
+                            result.setStatus(200);
+                            response.getWriter().write(writer.writeValueAsString(result));//loader.loadHtml("securityResource1.html"));
                         }
                         return;
                     default:
@@ -85,8 +99,12 @@ public class ClientSecurityResourceHandler extends HttpHandler {
             }
             String result = request.getParameter("result");
             if (result != null && result.equals("success")) {
+                Result res = new Result();
+                res.setResult("some sec action performed on remote host");
+                res.setStatus(200);
+                ObjectWriter objectWriter = mapper.writer().withDefaultPrettyPrinter();
                 final Writer writer = response.getWriter();
-                writer.write("some sec action performed on remote host.");
+                writer.write(objectWriter.writeValueAsString(res));
                 return;
             }
             String html = loader.loadHtml("securityResource.html");
