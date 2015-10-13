@@ -30,7 +30,9 @@ mvn compile exec:java -Dexec.mainClass="com.sec.web.app.Backend"  -Dexec.args="-
 mvn compile exec:java -Dexec.mainClass="com.sec.web.app.Backend"  -Dexec.args="-n 'OAuth server web application'"
 ```
 серверная часть инфрастуктуры
-После старта можно обратиться к веб приложению по дефолтному адресу http://localhost:80
+После старта можно обратиться к веб приложению по дефолтному адресу (http://localhost:80)
+
+#Настройки
 Для реализации протокола SSL используется сертификат server.cert в папке ресурсов проекта, который уже добавлен в
  keystore_server
 Они находятся в корне проекта
